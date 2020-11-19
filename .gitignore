@@ -1,0 +1,19 @@
+.gradle/
+local.properties
+
+*/build/
+secret.gradle
+proguard.map
+
+*~
+*.swp
+.DS_Store
+build
+
+# Android Studio
+.idea/*
+!.idea/codeStyles/Project.xml
+!.idea/codeStyles/codeStyleConfig.xml
+*.iml
+*.ipr
+*.iws

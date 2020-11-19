@@ -1,0 +1,24 @@
+<idea-plugin>
+    <id>com.cookpad.astemplates</id>
+    <name>Cookpad Android Studio templates</name>
+    <vendor email="victor-albertos@cookpad.com" url="https://www.cookpadteam.com/life-at-cookpad">Cookpad</vendor>
+
+    <description><![CDATA[
+    Android Studio templates used by the Cookpad Android team for code and architectural consistency: a set of blueprints for scaffolding feature screens built on top of Jetpack components: ViewModel, Paging, Navigation, LiveData and so on.<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.android</depends>
+    <depends>com.intellij.modules.androidstudio</depends>
+
+    <extensions defaultExtensionNs="com.android">
+        <tools.idea.wizard.template.wizardTemplateProvider
+                implementation="com.cookpad.astemplates.recipes.CustomWizardTemplateProvider"/>
+    </extensions>
+
+</idea-plugin>
