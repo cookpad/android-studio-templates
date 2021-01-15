@@ -9,7 +9,6 @@ fun fragment(
     val paginationImportsBlock = pagination.ifStandard {
         """
         import com.cookpad.android.core.extensions.lazyUnsynchronized
-        import kotlinx.android.synthetic.main.fragment_${screenName.toLowerCase()}.recyclerView
         import androidx.recyclerview.widget.LinearLayoutManager
         """.trimIndent()
     }
@@ -88,8 +87,7 @@ fun fragment(
         import ${packageName}.${screenName.toLowerCase()}.data.${screenName}SingleViewState
         import ${packageName}.${screenName.toLowerCase()}.data.${screenName}ViewState
         import org.koin.androidx.viewmodel.ext.android.viewModel
-        import com.cookpad.android.core.viewbinding.viewBinding
-        import ${packageName}.databinding.Fragment${screenName}Binding
+        import com.cookpad.android.ui.views.viewbinding.viewBinding
         $paginationImportsBlock
         $delegationImportsBlock
         

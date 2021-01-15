@@ -40,6 +40,21 @@ fun RecipeExecutor.featureScreenRecipe(
         )
     }
 
+    if (pagination == Pagination.Standard) {
+        save(
+            source = entity(packageName, screenName),
+            to = kotlinSrc.resolve("${screenName.toLowerCase()}/data/${screenName}.kt")
+        )
+        save(
+            source = viewHolder(packageName, screenName),
+            to = kotlinSrc.resolve("${screenName.toLowerCase()}/${screenName}ViewHolder.kt")
+        )
+        save(
+            source = itemLayout(),
+            to = resOut.resolve("layout/item_${screenName.toLowerCase()}.xml")
+        )
+    }
+
     save(
         source = viewState(packageName, screenName),
         to = kotlinSrc.resolve("${screenName.toLowerCase()}/data/${screenName}ViewState.kt")
@@ -69,6 +84,13 @@ fun RecipeExecutor.featureScreenRecipe(
         source = fragment(packageName, screenName, pagination, delegation),
         to = kotlinSrc.resolve("${screenName.toLowerCase()}/${screenName}Fragment.kt")
     )
+
+    if (pagination == Pagination.Standard) {
+        save(
+            source = adapter(packageName, screenName),
+            to = kotlinSrc.resolve("${screenName.toLowerCase()}/${screenName}Adapter.kt")
+        )
+    }
 
     if (delegation != Delegation.None) {
         save(
