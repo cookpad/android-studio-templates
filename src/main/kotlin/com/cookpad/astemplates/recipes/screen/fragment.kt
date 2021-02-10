@@ -1,10 +1,10 @@
 package com.cookpad.astemplates.recipes.screen
 
 fun fragment(
-    packageName: String,
-    screenName: String,
-    pagination: Pagination,
-    delegation: Delegation
+        packageName: String,
+        screenName: String,
+        pagination: Pagination,
+        delegation: Delegation
 ): String {
     val paginationImportsBlock = pagination.ifStandard {
         """
@@ -28,7 +28,7 @@ fun fragment(
         """.trimIndent()
     }
 
-    val paginationOnViewCreatedBlock = pagination.ifStandard  {
+    val paginationOnViewCreatedBlock = pagination.ifStandard {
         """
             
         binding.recyclerView.apply {
@@ -67,13 +67,17 @@ fun fragment(
             """.trimIndent()
     }
 
-    val paginationOnDestroyViewBlock = pagination.ifStandard {
+    val viewBindingBlock = if (pagination == Pagination.Standard) {
+        """
+        
+        private val binding by viewBinding(Fragment${screenName}Binding::bind, disposeCallback = {
+            recyclerView.adapter = null
+        })
+        """.trimIndent()
+    } else {
         """
             
-        override fun onDestroyView() {
-            binding.recyclerView.adapter = null
-            super.onDestroyView()
-        }
+        private val binding by viewBinding(Fragment${screenName}Binding::bind)
         """.trimIndent()
     }
 
@@ -96,7 +100,7 @@ fun fragment(
             // TODO: Implement the Koin dependency wiring for ${screenName}ViewModel.
             private val viewModel: ${screenName}ViewModel by viewModel()
             
-            private val binding by viewBinding(Fragment${screenName}Binding::bind)
+            $viewBindingBlock
             $paginationMembersBlock
             
             override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -117,7 +121,7 @@ fun fragment(
         
                 }
             }
-            $handleViewStateDelegateBlock$paginationOnDestroyViewBlock
+            $handleViewStateDelegateBlock
         }    
     """.trimIndent()
 }
