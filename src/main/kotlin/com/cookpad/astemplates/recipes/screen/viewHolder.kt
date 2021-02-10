@@ -8,9 +8,9 @@ fun viewHolder(packageName: String, screenName: String): String {
         import kotlinx.android.extensions.LayoutContainer
         import androidx.recyclerview.widget.RecyclerView
         import ${packageName}.${screenName.toLowerCase()}.data.${screenName}
+        import ${packageName}.databinding.Item${screenName}Binding
         
-        class ${screenName}ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-            LayoutContainer {
+        class ${screenName}ViewHolder(private val binding: Item${screenName}Binding) : RecyclerView.ViewHolder(binding.root) {
         
             fun bind(${screenName.toLowerCase()}: ${screenName}) {
         

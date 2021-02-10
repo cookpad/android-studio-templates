@@ -15,6 +15,7 @@ fun adapter(packageName: String, screenName: String) : String {
         import ${packageName}.R
         import ${packageName}.${screenName.toLowerCase()}.data.${screenName}
         import ${packageName}.${screenName.toLowerCase()}.${screenName}ViewHolder
+        import ${packageName}.databinding.Item${screenName}Binding
         
         class ${screenName}Adapter(
             paginatorStates: LiveData<PageState<${screenName}>>
@@ -25,8 +26,8 @@ fun adapter(packageName: String, screenName: String) : String {
             }
         
             override fun handleOnCreateViewHolder(parent: ViewGroup, viewType: Int): ${screenName}ViewHolder {
-                val root = LayoutInflater.from(parent.context).inflate(R.layout.item_${screenName.toLowerCase()}, parent, false)
-                return ${screenName}ViewHolder(root)
+                val binding = Item${screenName}Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return ${screenName}ViewHolder(binding)
             }
         
             companion object {
